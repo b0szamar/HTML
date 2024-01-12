@@ -6,4 +6,5 @@ const arrowFuggveny = () => {
             reversed += input[i];
         }
         console.log(reversed)
+        document.getElementById('output').innerHTML=reversed;
 };
