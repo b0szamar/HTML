@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>KURZUSPROJEKT</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <script src='js/main.js'></script>
+</head>
+<body>
+    <h1>Az Összes Kurzus:</h1>
+    <table id="ki"></table>
+
+    <h1>Felhasználók</h1>
+    <label for="courseid">Adja meg a kívánt kurzus ID-jét:</label>
+    <input id="courseid" type="number" min="1"><br>
+    <button onclick="kereses()">Keresés</button>
+    <div id="adatok"></div>
+     <h1>Tantárgy bevitel</h1>
+     <label for="inp">Adja meg a felvinni kívánt kurzust!</label>
+     <input type="text" id="inp">
+     <button onclick="postolj()">Post</button>
+</body>
+</html>
