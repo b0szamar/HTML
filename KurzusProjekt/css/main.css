@@ -1,0 +1,18 @@
+th, td{
+   border: solid 1px black;
+text-align: center;
+background: rgb(252,69,69);
+background: radial-gradient(circle, rgba(252,69,69,1) 0%, rgba(253,175,29,1) 50%, rgba(252,69,69,1) 100%);
+}
+body{
+    background: rgb(252,69,69);
+    background: linear-gradient(90deg, rgba(252,69,69,1) 0%, rgba(253,175,29,1) 50%, rgba(252,69,69,1) 100%);
+}
+button{
+    border-radius: 5px;
+    background: rgb(252,69,69);
+    background: linear-gradient(90deg, rgba(252,69,69,1) 0%, rgba(253,175,29,1) 50%, rgba(252,69,69,1) 100%);
+}
+#size{
+    font-size:larger;
+}
