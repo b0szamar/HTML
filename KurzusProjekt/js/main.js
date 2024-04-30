@@ -1,7 +1,14 @@
 const url = "https://vvri.pythonanywhere.com/api/courses";
 
 //GET
-fetch(url)
+function kiiras(){
+fetch(url, {
+    method: "GET",
+    headers: {
+        "Content-type": "application/json; charset=UTF-8",
+        "Access-Control-Allow-Origin": "*"
+    }
+})
     .then(response => response.json())
     .then(json => {
         let ki = `<tr><th>Id</th><th>Course</th><th colspan="25">Kurzus tagok</th></tr>`;
@@ -17,7 +24,7 @@ fetch(url)
         document.getElementById("ki").innerHTML = ki;
     });
 
-
+}
 //POST
 function postolj() {
     let postolando = document.getElementById("inp").value;
@@ -33,18 +40,7 @@ function postolj() {
         .then(response => response.json())
         .then(json => {
             console.log("Kurzus létrehozva", json);
-            fetch(url)
-                .then(response => response.json())
-                .then(json => {
-                    let ki = `<tr><th>Id</th><th>Course</th></tr>`;
-                    json.forEach(courses => {
-                        ki += `<tr>
-                            <td>${courses.id}</td>
-                            <td>${courses.name}</td>
-                        </tr>`;
-                    });
-                    document.getElementById("ki").innerHTML = ki;
-                });
+            kiiras()
         })
         .catch(error => console.error('Error a kurzus létrehozásánál:', error));
 }
@@ -73,13 +69,6 @@ function kereses() {
 }
 
 
-function kiiras(courses) {
-    let ki = document.getElementById("adatok");
-    ki.innerHTML += "<div>Id: " + courses.id + "\n</div>";
-    ki.innerHTML += "<div>Name: " + courses.name + "\n</div>";
-    document.getElementById("lab").style.display = "none";
-    console.log(ki);
-}
 
 //DIAK HOZZADASA
 function postoljDiak() {
@@ -99,18 +88,7 @@ function postoljDiak() {
         .then(response => response.json())
         .then(json => {
             console.log("Diák hozzáadva", json);
-            fetch(url)
-                .then(response => response.json())
-                .then(json => {
-                    let ki = `<tr><th>Id</th><th>Course</th></tr>`;
-                    json.forEach(courses => {
-                        ki += `<tr>
-                            <td>${courses.id}</td>
-                            <td>${courses.name}</td>
-                        </tr>`;
-                    });
-                    document.getElementById("ki").innerHTML = ki;
-                });
+            kiiras()
         })
         .catch(error => console.error('Error a diák létrehozásánál:', error));
 }
@@ -130,8 +108,10 @@ function keresesdiak() {
             document.getElementById("adatokdiak").innerHTML = `
             <p>Diák ID: ${studid}</p>
             <p>Név: ${student.name}</p>
+            
             Meg szeretné megváltoztatni a nevét? <input type="text" id="nevvalt" placeholder="Új név" >  
-            <button onclick="ujdiaknev(${studid})">Megváltoztatom!</button>
+            <button onclick="ujdiaknev(${studid})">Megváltoztatom!</button><br>
+            <button onclick="deleteStudent(${studid})">Törlés!</button>
                 `;
         })
         .catch(error => {
@@ -139,11 +119,12 @@ function keresesdiak() {
         });
 }
 
-function ujdiaknev(studid){
-    let ujnev = document.getElementById("nevvalt").value;
-    fetch(`https://vvri.pythonanywhere.com/api/students/`+studid,{
-        method: "PUT",
 
+function ujdiaknev(studid) {
+    let ujnev = document.getElementById("nevvalt").value;
+
+    fetch(`https://vvri.pythonanywhere.com/api/students/` + studid, {
+        method: "PUT",
         body: JSON.stringify({
             name: ujnev,
             course_id: studid
@@ -152,6 +133,24 @@ function ujdiaknev(studid){
             "Content-type": "application/json; charset=UTF-8"
         }
     })
-    console.log("A név megváltozott!")
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(json => {
+        console.log("A név meg lett változtatva", json);
+        kiiras();
+    })
+    .catch(error => console.error('Error a diák frissítésekor:', error));
 }
 
+function deleteStudent(studid) {
+        fetch(`https://vvri.pythonanywhere.com/api/students/${studid}`, {
+            method: 'DELETE'
+        })
+        .then(() => kiiras())
+        .catch(error => console.log('Hiba történt a diák törlésekor: ' + error));
+        console.log("Sikeres Törlés")
+}
