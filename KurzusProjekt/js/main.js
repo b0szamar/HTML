@@ -108,8 +108,7 @@ function keresesdiak() {
             document.getElementById("adatokdiak").innerHTML = `
             <p>Diák ID: ${studid}</p>
             <p>Név: ${student.name}</p>
-            
-            Meg szeretné megváltoztatni a nevét? <input type="text" id="nevvalt" placeholder="Új név" >  
+            Szeretné megváltoztatni a nevét?  <input type="text" id="curid" placeholder="KurzusID" > <input type="text" id="nevvalt" placeholder="Új név" >  
             <button onclick="ujdiaknev(${studid})">Megváltoztatom!</button><br>
             <button onclick="deleteStudent(${studid})">Törlés!</button>
                 `;
@@ -122,12 +121,13 @@ function keresesdiak() {
 
 function ujdiaknev(studid) {
     let ujnev = document.getElementById("nevvalt").value;
+    let selectedcourseid=document.getElementById("curid").value;
 
     fetch(`https://vvri.pythonanywhere.com/api/students/` + studid, {
         method: "PUT",
         body: JSON.stringify({
             name: ujnev,
-            course_id: studid
+            course_id: selectedcourseid
         }),
         headers: {
             "Content-type": "application/json; charset=UTF-8"
@@ -145,6 +145,8 @@ function ujdiaknev(studid) {
     })
     .catch(error => console.error('Error a diák frissítésekor:', error));
 }
+
+document.getElementById("ki").innerHTML = ki;
 
 function deleteStudent(studid) {
         fetch(`https://vvri.pythonanywhere.com/api/students/${studid}`, {
