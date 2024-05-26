@@ -1,19 +1,13 @@
 function divisors(integer) {
-    var result = [];
-    for (var a = 2; a*a <= integer; ++a) {
-      if (integer%a == 0) {
-        var b = integer/a;
-        result.push(a);
-        if (b != a) {
-          result.push(b);
-        }
-      }
+  let divs = []
+  let div = 2
+  while(integer > div) {
+    if(integer % div == 0) {
+      divs.push(div)
     }
-    if (result.length == 0) {
-      return integer+' is prime';
-    }
-    result.sort(function (a, b) {
-      return a - b;
-    });
-    return result;
-  };
+    div++
+  }
+  if(divs.length != 0)
+    return divs
+  return `${integer} is prime`
+}
