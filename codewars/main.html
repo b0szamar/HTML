@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Codewars User Points</title>
+
+</head>
+<body>
+    <h1>Codewars User Points</h1>
+    
+    <div id="menu">
+        <label for="username">Username:</label>
+        <input type="text" id="username" placeholder="Enter Codewars username">
+        <button onclick="fetchData()">Fetch Data</button>
+    </div>
+
+    <div id="view-selector">
+        <button onclick="showTotalPoints()">Show Total Points</button>
+        <button onclick="showLanguagePoints()">Show Language Points</button>
+    </div>
+
+    <div id="results">
+        <!-- Results will be displayed here -->
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
