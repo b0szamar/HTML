@@ -1,0 +1,46 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 24px;
+    color: #444;
+}
+.box {
+
+    border-radius: 5px;
+    margin-top: 15px;
+}
+.info{
+    border: 2px solid lightblue;
+}
+.warning{
+    border: 2px solid orange;
+}
+.fejlecinfo {
+    background-color: #e8f4fa;
+    padding: 15px;
+}
+.fejlec {
+    padding: 15px;
+    background-color: #fff3cd;
+
+}
+.box h2 {
+    font-size: 18px;
+    margin: 0;
+}
+.box p {
+margin-left: 10px;
+    padding: 10px;
+}
+ul {
+    
+    padding-left: 50px;
+}
+li{
+    margin-top: 15px;
+}
